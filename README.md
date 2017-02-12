@@ -182,7 +182,7 @@ This requires an access to multiple partitions. Performances may be subobtimal.
 
 ## 1.4: PHYSICAL ORGANIZATION
 We used the commands:
-"nodetools cfstasts sales" as a shell command to get information about the memory and disk used to store the column families.
+"nodetool cfstats sales" as a shell command to get information about the memory and disk used to store the column families.
 "tracing on" as a cqlsh command to get information about the queries run
 
 
