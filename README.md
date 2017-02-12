@@ -3,21 +3,32 @@
 q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
 
   SELECT cr.fromcurrencycode,
-    cr.tocurrencycode
+    cr.tocurrencycode,
     cr.averagerate
   FROM	sales.currencyrate cr
   WHERE	cr.fromcurrencycode = 'USD'
   AND cr.tocurrencycode = 'XXX'
   AND cr.currencyratedate BETWEEN ('YYY', 'ZZZ')
+
+q2: a report of the average rate of a currency (XXX) rate against the dollar in a specified time period.
+
+  SELECT cr.fromcurrencycode,
+    cr.tocurrencycode,
+    AVG(cr.averagerate)
+  FROM	sales.currencyrate cr
+  WHERE	cr.fromcurrencycode = 'USD'
+  AND cr.tocurrencycode = 'XXX'
+  AND cr.currencyratedate BETWEEN ('YYY', 'ZZZ')
+  GROUP BY cr.fromcurrencycode, cr.tocurrencycode
   
   
-q2: calculates the total amount of sales made last year by all the sales people.
+q3: calculates the total amount of sales made last year by all the sales people.
 
   SELECT	SUM(saleslastyear)
   FROM	sales.salesperson
 
   
-q3: gives as result the number of customers that a sales person has come in contact through his career.
+q4: gives as result the number of customers that a sales person has come in contact through his career.
 
   SELECT	businessentityid,
     COUNT(distinct customerid) as customernum
@@ -29,7 +40,7 @@ q3: gives as result the number of customers that a sales person has come in cont
   GROUP BY businessentityid
   
   
-q4: describes for every territory the products that had been sold and in which quantity.
+q5: describes for every territory the products that had been sold and in which quantity.
 
   SELECT	st.name,
     sod.productid,
@@ -42,7 +53,7 @@ q4: describes for every territory the products that had been sold and in which q
   GROUP BY st.territoryid, productid
   
   
-q5: a report of the sales id for every territory.
+q6: a report of the sales id for every territory.
 
   SELECT	st.name,
     soh.salesorderid
@@ -51,7 +62,7 @@ q5: a report of the sales id for every territory.
   ON	st.territoryid = soh.territoryid
   
   
-q6: is an aggregation of the sales for every territory.
+q7: is an aggregation of the sales for every territory.
 
   SELECT	st.name,
     COUNT(soh.salesorderid)
@@ -67,15 +78,15 @@ For the schema, refer to the file schema.sql.
 
 
 DESCRIPTIONS AND MOTIVATIONS:
-1.1: We invented 6 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
+1.1: We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
 
 
 1.2: We tried to design the Cassandra logical schema to satisfy the requirements of the queries at the best efficiency. Sometimes we loaded more data than necessary to allow more flexibility and more detailed queries.
 We need four tables: 
-Currencies to answer q1. 
-Salesperons to answer q2 and q3.
-territoryorders to answer q4.
-territorysales to answer q5 and q6.
+Currencies to answer q1 and q2. 
+Salesperons to answer q3 and q4.
+territoryorders to answer q5.
+territorysales to answer q6 and q7.
 
 1.3: We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
 
