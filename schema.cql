@@ -1,4 +1,4 @@
-DROP KEYSPACE sales;
+DROP KEYSPACE IF EXISTS sales ;
 
 CREATE KEYSPACE sales WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
 
