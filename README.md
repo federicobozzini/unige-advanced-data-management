@@ -208,10 +208,10 @@ Ony 1 SSTABLE is created for  every column family.
 - 2h: Familiarization with Cassandra, CQL and documentation reading
 - 30min: Familiarization with the DB schema and CSV data
 - 1h: Invention of the workload, preparation and testing (via postgres) of the queries.
-- 2h, 30min: Preparation of the Cassandra schema and scripts to convert and load the data
+- 2h 30min: Preparation of the Cassandra schema and scripts to convert and load the data
 - 30min: Preparation and testing of the CQL queries
 - 2h 30min: Documentation
-- 1.30h: Polishing and wrapping up of the project files
+- 1h 30min: Polishing and wrapping up of the project files
 
 ### ADDITIONAL INFO
 
