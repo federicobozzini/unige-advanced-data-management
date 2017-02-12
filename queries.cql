@@ -1,3 +1,5 @@
+USE sales;
+
 --Q1
 SELECT fromcurrencyname, tocurrencyname, date, averagerate
 FROM currencies 
