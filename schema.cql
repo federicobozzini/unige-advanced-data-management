@@ -9,7 +9,7 @@ CREATE TABLE currencies (
   tocurrencyname text,
   date timestamp,
   averagerate float,
-  PRIMARY KEY (fromcurrencyname, tocurrencyname, date)
+  PRIMARY KEY ((fromcurrencyname, tocurrencyname), date)
 );
 
 CREATE TABLE salespersons (

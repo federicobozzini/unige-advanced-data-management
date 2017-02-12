@@ -1,11 +1,14 @@
 1.1 THE WORKLOAD:
 
-q1: a report of the fluctuation of a currency rate against the dollar.
+q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
 
-  SELECT	cr.averagerate,
+  SELECT cr.fromcurrencycode,
     cr.tocurrencycode
+    cr.averagerate
   FROM	sales.currencyrate cr
   WHERE	cr.fromcurrencycode = 'USD'
+  AND cr.tocurrencycode = 'XXX'
+  AND cr.currencyratedate BETWEEN ('YYY', 'ZZZ')
   
   
 q2: calculates the total amount of sales made last year by all the sales people.
