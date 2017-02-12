@@ -34,14 +34,16 @@ We invented 7 queries. We tried to select different entities, different level of
   
 ### q4: gives as result the number of customers that a sales person has come in contact through his career.
 
-    SELECT	businessentityid,
+    SELECT	sp.businessentityid,
     COUNT(distinct customerid) as customernum
-    FROM	sales.salesterritoryhistory sth
-    JOIN	sales.salesterritory st
+    FROM	sales.salesperson sp
+    LEFT JOIN sales.salesterritoryhistory sth
+    ON sp.businessentityid = sth.businessentityid
+    LEFT JOIN	sales.salesterritory st
     ON	sth.territoryid = st.territoryid
-    JOIN	sales.customer c
+    LEFT JOIN	sales.customer c
     ON	c.territoryid = st.territoryid
-    GROUP BY businessentityid
+    GROUP BY sp.businessentityid
   
   
 ### q5: describes for every territory the products that had been sold and in which quantity.
@@ -67,7 +69,7 @@ We invented 7 queries. We tried to select different entities, different level of
 
     SELECT	st.name, COUNT(soh.salesorderid)
     FROM	sales.salesterritory st
-    JOIN	sales.salesorderheader soh
+    LEFT JOIN	sales.salesorderheader soh
     ON	st.territoryid = soh.territoryid
     WHERE st.name = 'United Kingdom'
     GROUP BY st.name
