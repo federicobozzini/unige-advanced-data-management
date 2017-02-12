@@ -1,4 +1,8 @@
-1.1 THE WORKLOAD:
+#ADM PROJECT 3
+
+##1.1 THE WORKLOAD:
+
+We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
 
 q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
 
@@ -73,29 +77,27 @@ q7: is an aggregation of the sales for every territory.
 
   
 
-1.2: LOGICAL DESIGN
+##1.2: LOGICAL DESIGN
 For the schema, refer to the file schema.sql.
 
+We tried to design the Cassandra logical schema to satisfy the requirements of the queries with the best efficiency. Sometimes we loaded more data than necessary to allow more flexibility and more detailed queries.
 
-DESCRIPTIONS AND MOTIVATIONS:
-1.1: We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
-
-
-1.2: We tried to design the Cassandra logical schema to satisfy the requirements of the queries at the best efficiency. Sometimes we loaded more data than necessary to allow more flexibility and more detailed queries.
 We need four tables: 
-Currencies to answer q1 and q2. 
-Salesperons to answer q3 and q4.
+currencies to answer q1 and q2. 
+salesperons to answer q3 and q4.
 territoryorders to answer q5.
 territorysales to answer q6 and q7.
 
-1.3: We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
+##1.3: IMPLEMENTATION
+We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
 
-1.4: We used the commands:
+##1.4: HYSICAL ORGANIZATION
+We used the commands:
 "nodetools cfstasts sales" as a shell command to get information about the memory and disk used to store the column families.
 "tracing on" as a cqlsh command to get information about the queries run
 
 
-TIME ESTIMATE:
+##TIME ESTIMATE:
 
 - 30min: Understanding the project requirements
 - 2h: Familiarization with Cassandra, CQL and documentation reading
