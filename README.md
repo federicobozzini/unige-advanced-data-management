@@ -129,20 +129,19 @@ We designed the column families to represent the logical schema.
 
 We developed 4 python scripts (create_currencies.py, create_salespersons.py, create_territoryorders.py, create_territorysales.py) to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented in paragraph 1.1) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
 
-The CQL queries would be:
+### CQL QUERIES
+The CQL queries (with non-significant parameters) would be:
 
-### q1:
-(with non-significant parameters)
+#### q1:
 
-    SELECT * 
+    SELECT fromcurrencyname, tocurrencyname, date, averagerate
     FROM currencies 
     WHERE fromcurrencyname = 'USD' 
     AND tocurrencyname = 'EUR' 
     AND date >= '2014-04-01' 
     AND date < '2014-05-01';
 
-### q2:
-(with non-significant parameters)
+#### q2:
 
     SELECT fromcurrencyname, tocurrencyname, AVG(averagerate)
     FROM currencies 
@@ -150,6 +149,34 @@ The CQL queries would be:
     AND tocurrencyname = 'EUR' 
     AND date >= '2014-04-01' 
     AND date < '2014-05-01';
+
+#### q3:
+
+    SELECT SUM(saleslastyear)
+    FROM salespersons;
+
+This requires an access to multiple partitions. Performances may be subobtimal.
+
+#### q4:
+
+    SELECT id, customerscount
+    FROM salespersons;
+
+#### q5:
+
+    SELECT territoryname, productid, quantity
+    FROM territorysales;
+
+#### q6:
+
+    SELECT territoryname, salesorderid
+    FROM territoryorders;
+
+#### q7:
+
+    SELECT territoryname, COUNT(salesorderid)
+    FROM territoryorders
+    WHERE territoryname = 'United Kingdom';
 
 ## 1.4: PHYSICAL ORGANIZATION
 We used the commands:
