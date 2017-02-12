@@ -92,7 +92,7 @@ territorysales to answer q6 and q7.
 ##1.3: IMPLEMENTATION
 We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
 
-##1.4: HYSICAL ORGANIZATION
+##1.4: PHYSICAL ORGANIZATION
 We used the commands:
 "nodetools cfstasts sales" as a shell command to get information about the memory and disk used to store the column families.
 "tracing on" as a cqlsh command to get information about the queries run
