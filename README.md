@@ -201,6 +201,18 @@ If we persist the colum families with the "flush" command, the SSTABLEs are acce
 
 Ony 1 SSTABLE is created for  every column family.
 
+When the data are flush and persistend the results we see for the queries are:
+
+q1, q2: Only 1 sstable and 1 partition is accessed. 30 live cells are found. The result is loaded in memory.
+q3, q4: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. 17 live cells are found. The result is loaded in memory.
+q5: Only 1 sstable is accessed. When the query is executed in the cqlish interface, the data are paginated. For every new page ("More...") a new session is created.
+q6: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. The result is loaded in memory.
+q7: The partial result is kept in memory. The process keeps on reading new live cells (100 every time) and updates the result in memory.
+
+If the data are not flushed, the execution follows a similar path but the data are read from the memtable.
+
+No tombstones cells are read in all cases because no data has been ever been deleted in this namespace.
+
 
 ## TIME ESTIMATE:
 
