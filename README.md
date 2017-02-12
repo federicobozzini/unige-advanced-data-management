@@ -8,6 +8,13 @@ To initialize the CSV data and the database, run the script init.sh .
 
 We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
 
+Assumptions:
+- The fromcurrencycode can be different than USD, even if the current data only USD appears.
+- Using the currency code to perform the query is ok.
+- We assume that the field "saleslastyear" of the "salespersons" table is always in the same currency, hence summable.
+- We use businessentityid as the main field to identify a sales person because we have no personal information. In the ideal case we should use the personal data as well.
+- We assume that using the "productid" is good enough to describe a product.
+
 ### q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
 
     SELECT cr.fromcurrencycode,
@@ -28,8 +35,7 @@ We invented 7 queries. We tried to select different entities, different level of
     AND cr.tocurrencycode = 'XXX'
     AND cr.currencyratedate BETWEEN 'YYY' AND 'ZZZ'
     GROUP BY cr.fromcurrencycode, cr.tocurrencycode
-  
-  
+
 ### q3: calculates the total amount of sales made last year by all the sales people.
 
     SELECT	SUM(saleslastyear)
@@ -39,7 +45,7 @@ We invented 7 queries. We tried to select different entities, different level of
 ### q4: gives as result the number of customers that a sales person has come in contact through his career.
 
     SELECT	sp.businessentityid,
-    COUNT(distinct customerid) as customernum
+    COUNT(distinct customerid) as customersnum
     FROM	sales.salesperson sp
     LEFT JOIN sales.salesterritoryhistory sth
     ON sp.businessentityid = sth.businessentityid
