@@ -1,5 +1,9 @@
 # ADM PROJECT 3
 
+## RUNNING THE PROJECT
+
+To initialize the CSV data and the database, run the script init.sh .
+
 ## 1.1 THE WORKLOAD:
 
 We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
