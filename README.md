@@ -9,6 +9,7 @@ To initialize the CSV data and the database, run the script init.sh .
 We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
 
 Assumptions:
+
 - The fromcurrencycode can be different than USD, even if the current data only USD appears.
 - Using the currency code to perform the query is ok.
 - We assume that the field "saleslastyear" of the "salespersons" table is always in the same currency, hence summable.
@@ -203,11 +204,11 @@ Ony 1 SSTABLE is created for  every column family.
 
 When the data are flush and persistend the results we see for the queries are:
 
-q1, q2: Only 1 sstable and 1 partition is accessed. 30 live cells are found. The result is loaded in memory.
-q3, q4: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. 17 live cells are found. The result is loaded in memory.
-q5: Only 1 sstable is accessed. When the query is executed in the cqlish interface, the data are paginated. For every new page ("More...") a new session is created.
-q6: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. The result is loaded in memory.
-q7: The partial result is kept in memory. The process keeps on reading new live cells (100 every time) and updates the result in memory.
+- q1, q2: Only 1 sstable and 1 partition is accessed. 30 live cells are found. The result is loaded in memory.
+- q3, q4: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. 17 live cells are found. The result is loaded in memory.
+- q5: Only 1 sstable is accessed. When the query is executed in the cqlish interface, the data are paginated. For every new page ("More...") a new session is created.
+- q6: Only 1 sstable and 1 partition is accessed. On sequential scan is performed. The result is loaded in memory.
+- q7: The partial result is kept in memory. The process keeps on reading new live cells (100 every time) and updates the result in memory.
 
 If the data are not flushed, the execution follows a similar path but the data are read from the memtable.
 
