@@ -103,7 +103,7 @@ We need four tables:
         PRIMARY KEY ((fromcurrencyname, tocurrencyname), date)
     );
 
-"currencies" is a dyanmic column family. The Partition key is made of the two columns "fromcurrencyname" and "tocurrencyname". The Clustering key is the date of the rate (column "date").
+"currencies" is a dyanmic column family. The Partition key is made of the two columns "fromcurrencyname" and "tocurrencyname". The Clustering key is the date of the rate (column "date"). In this case the data is structured but a partition is especially evident for the queries we need and may improve the performance greatly.
 
 ### salespersons to answer q3 and q4.
 
@@ -113,7 +113,7 @@ We need four tables:
         customerscount int
     );
 
-"salespersons" is a skinny column family. The Primary key is "id".
+"salespersons" is a skinny column family. The Primary key is "id". In this case the data is structured so a skinny column family is the right choice.
 
 ### territorysales to answer q5.
 
@@ -124,7 +124,7 @@ We need four tables:
         PRIMARY KEY(territoryname, productid)
     );
 
-"territorysales" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "productid".
+"territorysales" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "productid". In this case the primary key perfectly fits the query we need.
 
 ### territoryorders to answer q6 and q7.
 
@@ -134,7 +134,7 @@ We need four tables:
         PRIMARY KEY(territoryname, salesorderid)
     );
 
-"territoryorders" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "salesorderid".
+"territoryorders" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "salesorderid". In this case the wide rows approach may improve of our queries.
 
 
 ## 1.3: IMPLEMENTATION
