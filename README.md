@@ -4,7 +4,7 @@
 
 We invented 7 queries. We tried to select different entities, different level of complexities and different types of queries and results (Aggregates, Listings, ...). We tried to invent queries that may simulate real-life needs for company reports.
 
-q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
+###q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a specified time period.
 
   SELECT cr.fromcurrencycode,
     cr.tocurrencycode,
@@ -14,7 +14,7 @@ q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a
   AND cr.tocurrencycode = 'XXX'
   AND cr.currencyratedate BETWEEN 'YYY' AND 'ZZZ'
 
-q2: a report of the average rate of a currency (XXX) rate against the dollar in a specified time period.
+###q2: a report of the average rate of a currency (XXX) rate against the dollar in a specified time period.
 
   SELECT cr.fromcurrencycode,
     cr.tocurrencycode,
@@ -26,13 +26,13 @@ q2: a report of the average rate of a currency (XXX) rate against the dollar in 
   GROUP BY cr.fromcurrencycode, cr.tocurrencycode
   
   
-q3: calculates the total amount of sales made last year by all the sales people.
+###q3: calculates the total amount of sales made last year by all the sales people.
 
   SELECT	SUM(saleslastyear)
   FROM	sales.salesperson
 
   
-q4: gives as result the number of customers that a sales person has come in contact through his career.
+###q4: gives as result the number of customers that a sales person has come in contact through his career.
 
   SELECT	businessentityid,
     COUNT(distinct customerid) as customernum
@@ -44,7 +44,7 @@ q4: gives as result the number of customers that a sales person has come in cont
   GROUP BY businessentityid
   
   
-q5: describes for every territory the products that had been sold and in which quantity.
+###q5: describes for every territory the products that had been sold and in which quantity.
 
   SELECT	st.name,
     sod.productid,
@@ -57,7 +57,7 @@ q5: describes for every territory the products that had been sold and in which q
   GROUP BY st.territoryid, productid
   
   
-q6: a report of the orders id for every territory.
+###q6: a report of the orders id for every territory.
 
   SELECT	st.name,
     soh.salesorderid
@@ -66,7 +66,7 @@ q6: a report of the orders id for every territory.
   ON	st.territoryid = soh.territoryid
   
   
-q7: is an aggregation of the sales for every territory.
+###q7: is an aggregation of the sales for every territory.
 
   SELECT	st.name,
     COUNT(soh.salesorderid)
@@ -84,10 +84,49 @@ For the schema, refer to the file schema.sql.
 We tried to design the Cassandra logical schema to satisfy the requirements of the queries with the best efficiency. Sometimes we loaded more data than necessary to allow more flexibility and more detailed queries.
 
 We need four tables: 
-currencies to answer q1 and q2. 
-salesperons to answer q3 and q4.
-territoryorders to answer q5.
-territorysales to answer q6 and q7.
+###currencies to answer q1 and q2. 
+
+CREATE TABLE currencies (
+  fromcurrencyname text,
+  tocurrencyname text,
+  date timestamp,
+  averagerate float,
+  PRIMARY KEY ((fromcurrencyname, tocurrencyname), date)
+);
+
+"currencies" is a dyanmic column family. The Partition key is made of the two columns "fromcurrencyname" and "tocurrencyname". The Clustering key is the date of the rate (column "date").
+
+###salespersons to answer q3 and q4.
+
+CREATE TABLE salespersons (
+  id int PRIMARY KEY,
+  saleslastyear float,
+  customerscount int
+);
+
+"salespersons" is a skinny column family. The Primary key is "id".
+
+###territorysales to answer q5.
+
+CREATE TABLE territorysales(
+  territoryname text,
+  productid int,
+  quantity int,
+  PRIMARY KEY(territoryname, productid)
+);
+
+"territorysales" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "productid".
+
+###territoryorders to answer q6 and q7.
+
+CREATE TABLE territoryorders(
+  territoryname text,
+  salesorderid int,
+  PRIMARY KEY(territoryname, salesorderid)
+);
+
+"territoryorders" is a dyanmic column family. The Partition key is "territoryname". The Clustering key is "salesorderid".
+
 
 ##1.3: IMPLEMENTATION
 We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
