@@ -2,14 +2,10 @@
 
 q1: a report of the fluctuation of a currency rate against the dollar.
 
-  SELECT	businessentityid,
-    COUNT(distinct customerid) as customernum
-  FROM	sales.salesterritoryhistory sth
-  JOIN	sales.salesterritory st
-  ON	sth.territoryid = st.territoryid
-  JOIN	sales.customer c
-  ON	c.territoryid = st.territoryid
-  GROUP BY businessentityid
+  SELECT	cr.averagerate,
+    cr.tocurrencycode
+  FROM	sales.currencyrate cr
+  WHERE	cr.fromcurrencycode = 'USD'
   
   
 q2: calculates the total amount of sales made last year by all the sales people.
