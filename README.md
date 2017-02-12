@@ -8,7 +8,7 @@ q1: a report of the fluctuation of a currency (XXX) rate against the dollar in a
   FROM	sales.currencyrate cr
   WHERE	cr.fromcurrencycode = 'USD'
   AND cr.tocurrencycode = 'XXX'
-  AND cr.currencyratedate BETWEEN ('YYY', 'ZZZ')
+  AND cr.currencyratedate BETWEEN 'YYY' AND 'ZZZ'
 
 q2: a report of the average rate of a currency (XXX) rate against the dollar in a specified time period.
 
@@ -18,7 +18,7 @@ q2: a report of the average rate of a currency (XXX) rate against the dollar in 
   FROM	sales.currencyrate cr
   WHERE	cr.fromcurrencycode = 'USD'
   AND cr.tocurrencycode = 'XXX'
-  AND cr.currencyratedate BETWEEN ('YYY', 'ZZZ')
+  AND cr.currencyratedate BETWEEN 'YYY' AND 'ZZZ'
   GROUP BY cr.fromcurrencycode, cr.tocurrencycode
   
   
