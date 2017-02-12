@@ -183,7 +183,13 @@ This requires an access to multiple partitions. Performances may be subobtimal.
 ## 1.4: PHYSICAL ORGANIZATION
 We used the commands:
 "nodetool cfstats sales" as a shell command to get information about the memory and disk used to store the column families.
-"tracing on" as a cqlsh command to get information about the queries run
+"nodetool cfstats flush" as a shell command to persist the keyspace from memory to the disk.
+"tracing on" as a cqlsh command to get information about the queries run.
+
+By accessing the column families before the "flush" command is run, the queries access only the MEMTABLEs. 
+If we persist the colum families with the "flush" command, the SSTABLEs are accessed. 
+
+Ony 1 SSTABLE is created for  every column family.
 
 
 ## TIME ESTIMATE:
