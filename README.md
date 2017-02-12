@@ -57,7 +57,7 @@ q5: describes for every territory the products that had been sold and in which q
   GROUP BY st.territoryid, productid
   
   
-q6: a report of the sales id for every territory.
+q6: a report of the orders id for every territory.
 
   SELECT	st.name,
     soh.salesorderid
@@ -74,6 +74,7 @@ q7: is an aggregation of the sales for every territory.
   JOIN	sales.salesorderheader soh
   ON	st.territoryid = soh.territoryid
   WHERE st.name = 'United Kingdom'
+  GROUP BY st.name
 
   
 
