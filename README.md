@@ -125,7 +125,31 @@ We need four tables:
 
 
 ## 1.3: IMPLEMENTATION
-We designed the column families to represent the logical schema.  We developed 4 python scripts to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented before) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
+We designed the column families to represent the logical schema. 
+
+We developed 4 python scripts (create_currencies.py, create_salespersons.py, create_territoryorders.py, create_territorysales.py) to convert the data from the CSV source to the target CSV. Efficiency was not a main concern here. In a real world scenario our approach would have been to use a SQL (with the queries presented in paragraph 1.1) to extract the data. We prepared to CQL to present the correct results with the best possible efficiency.
+
+The CQL queries would be:
+
+### q1:
+(with non-significant parameters)
+
+    SELECT * 
+    FROM currencies 
+    WHERE fromcurrencyname = 'USD' 
+    AND tocurrencyname = 'EUR' 
+    AND date >= '2014-04-01' 
+    AND date < '2014-05-01';
+
+### q2:
+(with non-significant parameters)
+
+    SELECT fromcurrencyname, tocurrencyname, AVG(averagerate)
+    FROM currencies 
+    WHERE fromcurrencyname = 'USD' 
+    AND tocurrencyname = 'EUR' 
+    AND date >= '2014-04-01' 
+    AND date < '2014-05-01';
 
 ## 1.4: PHYSICAL ORGANIZATION
 We used the commands:
