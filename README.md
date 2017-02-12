@@ -106,5 +106,5 @@ We used the commands:
 - 1h: Invention of the workload, preparation and testing (via postgres) of the queries.
 - 2h, 30min: Preparation of the Cassandra schema and scripts to convert and load the data
 - 30min: Preparation and testing of the CQL queries
-- 1h: Documentation
-- 30min: Polishing and wrapping up of the project files
+- 1h 30min: Documentation
+- 1h: Polishing and wrapping up of the project files
