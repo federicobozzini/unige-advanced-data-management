@@ -2,6 +2,10 @@
 
 ## RUNNING THE PROJECT
 
+To start docker move to the project folder and run the command 
+
+    docker-compose up -d
+
 To initialize the CSV data and the database, run the script init.sh .
 
 ## 1.1 THE WORKLOAD:

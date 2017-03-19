@@ -1,0 +1,10 @@
+version: '2'
+services:
+  admws:
+    image: acrrd/adm-workstation
+    container_name: admws
+    ports:
+      - "2022:22"
+    volumes:
+      - .:/home/student/share
+    restart: always
