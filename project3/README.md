@@ -2,7 +2,7 @@
 
 ## RUNNING THE PROJECT
 
-To start docker move to the project folder and run the command 
+To start docker move to the root folder and run the command 
 
     docker-compose up -d
 

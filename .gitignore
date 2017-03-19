@@ -1,0 +1,6 @@
+/project1/exercise*/*.class
+/project2/exercise*/*.class
+/project2/pig*.log
+/project*/*/*.jar
+/project*/*.jar
+/.vscode

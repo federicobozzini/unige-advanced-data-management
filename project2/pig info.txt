@@ -1,0 +1,6 @@
+GRUPPO: Federico Semprini, Federico Bozzini
+Esercizio A: Vengono estratte le parole e la loro frequenza, viene raggruppato per frequenza, viene mappata per ogni coppia la frequenza e le parole concatenate in una stringa
+Esercizio B: Simile all'esercizio A ma con il conto delle parole invece della loro concatenazione.
+Esercizio D: Vengono estratte le parole e la loro frequenza, vengono raggruppate le coppie, viene calcolato il massimo tra le frequenze ed infine viene recuperata la coppia con il valore massimo.
+Esercizio E: Vengono estratte le coppie (frequenza,conteggio) vengono raggruppate e viene calcolata la media.
+Esercizio F: Vengono estratte le coppie (frequenza,conteggio) e (frequenza,parole), viene eseguita la join, e viene mappato il risultato della join mantenendo solamente la coppia (conteggio, parole).

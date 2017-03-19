@@ -4,8 +4,14 @@ First project of the [Advanced Data Management](http://computerscience.dibris.un
 
 ## RUNNING THE PROJECT
 
-To start docker move to the project folder and run the command 
+To start docker move to the root folder and run the command 
 
     docker-compose up -d
+
+To initialize the data
+
+    hdfs dfs -mkdir -p wordcount/input
+
+    hdfs dfs -put data/* /user/student/wordcount/input
 
 To run the map-reduce scipts see the file run_all.sh and the run.sh files in each exercise folder.

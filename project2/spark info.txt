@@ -1,0 +1,15 @@
+Componenti Gruppo: Bozzini, Semprini
+
+
+Spiegazione:
+
+Esercizio A: Le coppie parola-frequenza vengono prima lette. La chiave diventa la frequenza, le parole vengono raggruppate e concatenate.
+Esercizio B: Le coppie venggono lette, e vengono create delle coppie <parola-1>. Vengono in seguito contate le parole sommando gli 1 relativi.
+Esercizio Ca: Come l'esercizo A, ma l'output e' la persistenza di un oggetto.
+Esercizio Cb: Come l'esercizo B, ma l'output e' la persistenza di un oggetto.
+Esercizio D: Viene creato un comparator per gl interi. Viene letto l'oggetto serializzato nell'esercizio Ca e viene calcolato la coppia parola-frequenza con frequenza massima. Il risultato viene riconvertito in un rdd e stampato.
+Esercizio E: Viene letto l'oggetto serializzato nell'esercizio Cb e viene salvato in memoria. In seguito viene calcolata la media e conteggio delle frequenze e da questi viene calcolata la media delle frequenze. Il risultato viene riconvertito in un rdd e stampato.
+Esercizio F: Vengono letti gli oggetti serializzati negli esercizi C. Questi vengono joinati sulla chiave (frequenza). Il risultato della join viene stampato.
+
+Nota:
+Gli esercizi sono stati svolti in Java.
